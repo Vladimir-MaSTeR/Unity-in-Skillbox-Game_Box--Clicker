@@ -1,14 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-
+    [Header("Amount Text")]
     [SerializeField] private Text _text;
-    [SerializeField] private int _startAmountText = 1;
+
+    [Header("Start amount count")]
+    [SerializeField] private int _minAmountText = 1;
+    [SerializeField] private int _maxAmountText = 10;
 
     private int _id;
     private int _currentAmountForText;
@@ -26,13 +27,8 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         _mainCanvas = GetComponentInParent<Canvas>();
         _canvasGroup = GetComponent<CanvasGroup>();
 
-        _currentAmountForText = _startAmountText;
+        _currentAmountForText = Random.Range(_minAmountText, _maxAmountText);
         _text.text = _currentAmountForText.ToString();
-    }
-
-    private void Update()
-    {
-       // _text.
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -70,21 +66,4 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         return _id;
     }
 
-
-    private void OnEnable()
-    {
-        EventsForMearge.onSameTag += UpdateText;
-    }
-
-    private void OnDisable()
-    {
-        EventsForMearge.onSameTag -= UpdateText;
-    }
-
-
-    private void UpdateText(int amount)
-    {
-        _currentAmountForText += amount;
-        _text.text = _currentAmountForText.ToString();
-    }
 }
