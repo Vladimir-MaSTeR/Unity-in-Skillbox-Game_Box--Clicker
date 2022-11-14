@@ -29,7 +29,7 @@ public class TimeRoundController : MonoBehaviour
         
         } else
         {
-            _currentTimeRound = _timeRound;
+            EventsForMearge.onEndRoundTime?.Invoke();
         }
        
        

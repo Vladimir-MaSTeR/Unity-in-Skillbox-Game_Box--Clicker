@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ButtonsConroller : MonoBehaviour
@@ -6,11 +7,6 @@ public class ButtonsConroller : MonoBehaviour
     [Header("Panels")]
     [SerializeField] private GameObject _rulsPanel;
     [SerializeField] private GameObject _pausePanel;
-    [SerializeField] private GameObject _winerPanel;
-
-    [Header("Text")]
-    [SerializeField] private Text adada;
-
 
     private void Start()
     {
@@ -18,7 +14,6 @@ public class ButtonsConroller : MonoBehaviour
 
         _rulsPanel.SetActive(false);
         _pausePanel.SetActive(false);
-        _winerPanel.SetActive(false);
     }
 
     public void ClickRulsButton()
@@ -49,5 +44,10 @@ public class ButtonsConroller : MonoBehaviour
     public void ClickExitSceneInPausePanelButton()
     {
 
+    }
+
+    public void ClickRepeadRoundInWinerPanelbutton()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

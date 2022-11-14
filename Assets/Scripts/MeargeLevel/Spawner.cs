@@ -5,7 +5,7 @@ public class Spawner : MonoBehaviour
 {
     [Header("Timers")]
     [SerializeField] private float _timeRespavnItem = 2f;
-    [SerializeField] private float _jobTime = 10f;
+    [SerializeField] private float _timeMovingYellow = 15f;
 
     [Header("Slots")]
     [SerializeField] private Image[] _slots;
@@ -18,7 +18,7 @@ public class Spawner : MonoBehaviour
     private int _indexJobSlot;
 
     private int _currentItemIndex;
-    private float _currentJobTime;
+    private float _currentMovingYellowTime;
 
     private float _currentTimeRessItem;
 
@@ -29,7 +29,7 @@ public class Spawner : MonoBehaviour
         _currentTimeRessItem = _timeRespavnItem;
 
         _indexJobSlot = Random.Range(0, _slots.Length);
-        _currentJobTime = _jobTime;
+        _currentMovingYellowTime = _timeMovingYellow;
 
         _slots[_indexJobSlot].color = Color.yellow;
     }
@@ -39,6 +39,8 @@ public class Spawner : MonoBehaviour
     {
         SpavnInZeroPoint();
         ChangeJobInSlot();
+
+        JobBank();
     }
 
     private void SpavnInZeroPoint()
@@ -48,7 +50,7 @@ public class Spawner : MonoBehaviour
             if (_slots[_currentSlotIndex].GetComponentInChildren<CanvasGroup>() != null)
             {
                 _currentSlotIndex = Random.Range(0, _slots.Length);
-                _currentItemIndex = _currentItemIndex = Random.Range(0, _items.Length);
+                _currentItemIndex = Random.Range(0, _items.Length);
             }
             else
             {
@@ -56,7 +58,7 @@ public class Spawner : MonoBehaviour
 
                 _currentTimeRessItem = _timeRespavnItem;
                 _currentSlotIndex = Random.Range(0, _slots.Length);
-                _currentItemIndex = _currentItemIndex = Random.Range(0, _items.Length);
+                _currentItemIndex = Random.Range(0, _items.Length);
             }
 
         } else
@@ -65,9 +67,19 @@ public class Spawner : MonoBehaviour
         }
     }
 
+    private void JobBank()
+    {
+        if (_slots[_indexJobSlot].GetComponentInChildren<CanvasGroup>() != null)
+        {
+            var amount = _slots[_indexJobSlot].GetComponentInChildren<Item>().GetCurrentAmountForText();
+            EventsForMearge.onActivBank?.Invoke(amount);
+        }
+    }
+   
+
     private void ChangeJobInSlot()
     {
-        if (_currentJobTime < 0)
+        if (_currentMovingYellowTime < 0)
         {
 
             _slots[_indexJobSlot].color = Color.white;
@@ -75,10 +87,10 @@ public class Spawner : MonoBehaviour
             _indexJobSlot = Random.Range(0, _slots.Length);
             _slots[_indexJobSlot].color = Color.yellow;
 
-            _currentJobTime = _jobTime;
+            _currentMovingYellowTime = _timeMovingYellow;
         } else
         {
-            _currentJobTime -= Time.deltaTime;
+            _currentMovingYellowTime -= Time.deltaTime;
         }
     }
 }
