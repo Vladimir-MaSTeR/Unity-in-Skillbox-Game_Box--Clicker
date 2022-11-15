@@ -5,11 +5,11 @@ using UnityEngine;
 public class ClickButtons : MonoBehaviour
 {
 
-    [SerializeField] AudioSource audioSource;
-    [SerializeField] AudioClip clip;
+    [SerializeField] AudioSource _clickButtonsAudioSource;
+    [SerializeField] AudioClip _clip;
 
     public void Click()
     {
-        audioSource.PlayOneShot(clip);
+        _clickButtonsAudioSource.PlayOneShot(_clip);
     }
 }

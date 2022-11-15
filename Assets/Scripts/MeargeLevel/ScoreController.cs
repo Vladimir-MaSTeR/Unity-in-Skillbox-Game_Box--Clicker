@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,7 +11,9 @@ public class ScoreController : MonoBehaviour
 
     private void Start()
     {
-        UpdateScoreText(0);
+        _currentScore = 0;
+        _scoreText.text = _currentScore.ToString();
+
         _currentJobTime = _jobTime;
     }
 
@@ -50,6 +50,7 @@ public class ScoreController : MonoBehaviour
             _currentScore += amount;
 
             _scoreText.text = _currentScore.ToString();
+            EventsForMearge.onUpdateScoreTextPlaySound?.Invoke();
         }
     }
 

@@ -49,6 +49,8 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         transform.localPosition = Vector3.zero;
 
         _canvasGroup.blocksRaycasts = true;
+
+        EventsForMearge.onEndDragSound?.Invoke();
     }
 
     public int GetCurrentAmountForText()

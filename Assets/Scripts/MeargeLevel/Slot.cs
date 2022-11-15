@@ -34,7 +34,12 @@ public class Slot : MonoBehaviour, IDropHandler
                 gameObject.GetComponentInChildren<Text>().text = currentAmount.ToString();
                 gameObject.GetComponentInChildren<Item>().SetCurrentAmountForText(currentAmount);
 
+                EventsForMearge.onPositiveMeargeSound?.Invoke();
+
                 Destroy(eventData.pointerDrag);
+            } else
+            {
+                EventsForMearge.onNoMeargeSound?.Invoke();
             }
         }
 
