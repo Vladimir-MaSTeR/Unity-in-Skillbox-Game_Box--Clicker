@@ -46,6 +46,6 @@ public class ButtonsControllerMenuLevel : MonoBehaviour
 
     public void ClicExitGame()
     {
-       // SceneManager.LoadScene(1);
+        Application.Quit();
     }
 }
