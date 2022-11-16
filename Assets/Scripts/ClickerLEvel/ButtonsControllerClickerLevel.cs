@@ -62,22 +62,26 @@ public class ButtonsControllerClickerLevel : MonoBehaviour
 
     public void ClickHomeUpgradeButton()
     {
-        // Отправить Эвент
-        Debug.Log("Нажата кнопка в магазине апгрейда замка");
+        EventClickerController.onUpgradeHome?.Invoke();
     }
 
     public void ClickDamageUpgradeButton()
     {
         // Отправить Эвент
         Debug.Log("Нажата кнопка в магазине, увеличения урона");
+        EventClickerController.onUpgradeDamage?.Invoke();
 
     }
 
     public void ClicStartMeardgRound()
     {
-        // Сохранить статистику и запустить сцену
-        Debug.Log("Нажата кнопка запуска MEARDG сцены");
+        EventClickerController.onSlickMeargeScene?.Invoke();
 
+    }
+
+    public void ClickDamage()
+    {
+        EventClickerController.onDamageClick?.Invoke();
     }
 
 

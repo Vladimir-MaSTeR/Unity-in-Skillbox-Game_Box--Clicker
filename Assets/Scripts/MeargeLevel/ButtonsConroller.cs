@@ -12,7 +12,7 @@ public class ButtonsConroller : MonoBehaviour
     {
         Time.timeScale = 1;
 
-        _rulsPanel.SetActive(false);
+        _rulsPanel.SetActive(true);
         _pausePanel.SetActive(false);
     }
 
@@ -50,4 +50,10 @@ public class ButtonsConroller : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
+    public void ClickBackClickerScene()
+    {
+        EventsForMearge.onBackClickerScene?.Invoke();
+    }
+
 }

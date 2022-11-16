@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MeargeGameController : MonoBehaviour
@@ -18,11 +19,14 @@ public class MeargeGameController : MonoBehaviour
     private void OnEnable()
     {
         EventsForMearge.onEndRoundTime += EndRound;
+        EventsForMearge.onBackClickerScene += GoClickerScene;
     }
 
     private void OnDisable()
     {
         EventsForMearge.onEndRoundTime -= EndRound;
+        EventsForMearge.onBackClickerScene -= GoClickerScene;
+
     }
 
     private void EndRound()
@@ -32,6 +36,21 @@ public class MeargeGameController : MonoBehaviour
 
         var finaleScore = gameObject.GetComponent<ScoreController>().GetScore();
         _scoreTextInwinerPanel.text = finaleScore.ToString();
+        SaveScore();
+    }
+
+    private void GoClickerScene()
+    {
+        SaveScore();
+        SceneManager.LoadScene(1);
+    }
+
+    private void SaveScore()
+    {
+        var finaleScore = gameObject.GetComponent<ScoreController>().GetScore();
+        PlayerPrefs.SetInt("score", finaleScore);
+
+        PlayerPrefs.Save();
     }
 
 }
