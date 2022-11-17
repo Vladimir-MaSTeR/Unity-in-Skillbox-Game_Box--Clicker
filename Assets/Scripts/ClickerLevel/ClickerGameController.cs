@@ -59,8 +59,11 @@ public class ClickerGameController : MonoBehaviour
         UpdateText(_coinText, _currentCoin);
 
         LoadScore();
-        UpdateText(_coinText, (_currentCoin + _score));
 
+        var scoreCoin = _currentCoin + _score;
+        _currentCoin = scoreCoin;
+        UpdateText(_coinText, _currentCoin);
+        
         //_currendDamage = _startDamage;
         LoadDamage();
         UpdateText(_damageText, _currendDamage);
@@ -86,6 +89,8 @@ public class ClickerGameController : MonoBehaviour
 
     private void Update()
     {
+        //PlayerPrefs.DeleteAll();
+
         if (_currentTimerPasiveProfit > 0)
         {
             _currentTimerPasiveProfit -= Time.deltaTime;
@@ -96,13 +101,6 @@ public class ClickerGameController : MonoBehaviour
         {
             _currentTimerPasiveProfit = _timePasiveProfit;
             PasiveProfit();
-        }
-
-        if (_score > 0)
-        {
-            UpdateText(_coinText, (_currentCoin + _score));
-            PlayerPrefs.DeleteAll();
-
         }
     }
 
@@ -232,10 +230,18 @@ public class ClickerGameController : MonoBehaviour
     PlayerPrefs.SetInt("currendHealtMonster", _currendHealtMonster);
     PlayerPrefs.SetInt("currendIndexRespawnMonster", _currendIndexRespawnMonster);
     PlayerPrefs.SetFloat("currentTimerPasiveProfit", _currentTimerPasiveProfit);
-    PlayerPrefs.SetFloat("currentPasiveProfit", _currentPasiveProfit);
-    PlayerPrefs.SetFloat("currentHomeLevel", _currentHomeLevel);
+    PlayerPrefs.SetInt("currentPasiveProfit", _currentPasiveProfit);
+    PlayerPrefs.SetInt("currentHomeLevel", _currentHomeLevel);
 
     PlayerPrefs.Save();
+
+        Debug.Log($"Сохранил currentCoin = {_currentCoin}");
+        Debug.Log($"Сохранил currendDamage = {_currendDamage}");
+        Debug.Log($"Сохранил currendHealtMonster = {_currendHealtMonster}");
+        Debug.Log($"Сохранил currendIndexRespawnMonster = {_currendIndexRespawnMonster}");
+        Debug.Log($"Сохранил currentTimerPasiveProfit = {_currentTimerPasiveProfit}");
+        Debug.Log($"Сохранил currentPasiveProfit = {_currentPasiveProfit}");
+        Debug.Log($"Сохранил currentHomeLevel = {_currentHomeLevel}");
     }
 
     private void LoadHomeLevel()
@@ -243,6 +249,7 @@ public class ClickerGameController : MonoBehaviour
         if (PlayerPrefs.HasKey("currentHomeLevel"))
         {
             _currentHomeLevel = PlayerPrefs.GetInt("currentHomeLevel");
+            Debug.Log($"Загрузил currentHomeLevel = {_currentHomeLevel}");
 
         }
         else
@@ -256,6 +263,7 @@ public class ClickerGameController : MonoBehaviour
         if (PlayerPrefs.HasKey("currentPasiveProfit"))
         {
             _currentPasiveProfit = PlayerPrefs.GetInt("currentPasiveProfit");
+            Debug.Log($"Загрузил currentPasiveProfit = {_currentPasiveProfit}");
 
         }
         else
@@ -268,7 +276,9 @@ public class ClickerGameController : MonoBehaviour
     {
         if (PlayerPrefs.HasKey("currentTimerPasiveProfit"))
         {
-            _currentTimerPasiveProfit = PlayerPrefs.GetInt("currentTimerPasiveProfit");
+            _currentTimerPasiveProfit = PlayerPrefs.GetFloat("currentTimerPasiveProfit");
+            Debug.Log($"Загрузил currentTimerPasiveProfit = {_currentTimerPasiveProfit}");
+
 
         }
         else
@@ -282,6 +292,8 @@ public class ClickerGameController : MonoBehaviour
         if (PlayerPrefs.HasKey("currentCoin"))
         {
             _currentCoin = PlayerPrefs.GetInt("currentCoin");
+            Debug.Log($"Загрузил currentCoin = {_currentCoin}");
+
 
         }
         else
@@ -295,8 +307,10 @@ public class ClickerGameController : MonoBehaviour
         if (PlayerPrefs.HasKey("currendIndexRespawnMonster"))
         {
             _currendIndexRespawnMonster = PlayerPrefs.GetInt("currendIndexRespawnMonster");
+            Debug.Log($"Загрузил currendIndexRespawnMonster = {_currendIndexRespawnMonster}");
 
-        } else
+        }
+        else
         {
             _currendIndexRespawnMonster = 0;
         }      
@@ -307,6 +321,8 @@ public class ClickerGameController : MonoBehaviour
         if (PlayerPrefs.HasKey("currendDamage"))
         {
             _currendDamage = PlayerPrefs.GetInt("currendDamage");
+            Debug.Log($"Загрузил currendDamage = {_currendDamage}");
+
         }
         else
         {
@@ -319,6 +335,8 @@ public class ClickerGameController : MonoBehaviour
         if (PlayerPrefs.HasKey("currendHealtMonster"))
         {
             _currendHealtMonster = PlayerPrefs.GetInt("currendHealtMonster");
+            Debug.Log($"Загрузил currendHealtMonster = {_currendHealtMonster}");
+
 
         }
         else
@@ -333,7 +351,7 @@ public class ClickerGameController : MonoBehaviour
         {
             
             _score = PlayerPrefs.GetInt("score");
-            Debug.Log($"score = {_score}");
+            Debug.Log($"Загрузил score = {_score}");
 
         }
         else

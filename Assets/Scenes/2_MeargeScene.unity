@@ -3879,7 +3879,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeText: {fileID: 1977535854}
-  _timeRound: 120
+  _timeRound: 60
 --- !u!1 &1533617575
 GameObject:
   m_ObjectHideFlags: 0

@@ -3759,7 +3759,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _coinText: {fileID: 1460781807}
-  _startCoin: 0
+  _startCoin: 20000
   _damageText: {fileID: 1048462276}
   _startDamage: 1
   _plantForMonsters: {fileID: 1609637058}
@@ -3772,7 +3772,7 @@ MonoBehaviour:
   _pasiveProfitText: {fileID: 978629579}
   _startPasiveProfit: 10
   _timerPasiveProfitText: {fileID: 1977535854}
-  _timePasiveProfit: 120
+  _timePasiveProfit: 10
   _homeLevelText: {fileID: 2085872325}
   _startHomeLevel: 1
 --- !u!1 &1358418527
